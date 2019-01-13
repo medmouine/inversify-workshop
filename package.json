@@ -1,7 +1,7 @@
 {
-  "name": "inversify-starter",
+  "name": "inversify-library-workshop",
   "version": "1.0.0",
-  "description": "",
+  "description": "Simple inversify exemple made in the context of a workshop for INGENO and university Laval",
   "main": "app.js",
   "scripts": {
     "test": "jest",
