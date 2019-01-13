@@ -1,4 +1,3 @@
-const TYPES = {
+export const TYPES = {
+  CustomerService: Symbol.for('CustomerService'),
 };
-
-export default TYPES;

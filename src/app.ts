@@ -13,6 +13,8 @@ import * as methodOverride from 'method-override';
 import * as morgan from 'morgan';
 import * as path from 'path';
 import { logger } from './logger';
+import { CustomerService } from '@/infrastructure';
+import { TYPES } from '@/constants/types';
 
 export class Server {
 
@@ -25,6 +27,7 @@ export class Server {
 
   constructor () {
     this.container = new Container();
+    this.init();
     const inversifyApp: InversifyExpressServer = new InversifyExpressServer(this.container);
 
     // configure application
@@ -33,7 +36,6 @@ export class Server {
     });
     this.app = inversifyApp.build();
   }
-
   public config (app: express.Application): void {
     // add static paths
     app.use(express.static(path.join(__dirname, 'public')));
@@ -62,5 +64,9 @@ export class Server {
 
     // error handling
     app.use(errorHandler());
+  }
+
+  private init(): void {
+    this.container.bind<CustomerService>(TYPES.CustomerService).to(CustomerService);
   }
 }

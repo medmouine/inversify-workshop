@@ -1,11 +1,11 @@
 /* tslint:disable:no-unused-expression */
 
-import {HelloWorldRoute} from "@/routes/helloWorldRoute";
+import {CustomerRoute} from "@/routes/customerRoute";
 import 'reflect-metadata';
 
 describe('Hello world route test', () => {
 
-  const helloWorldRoute: HelloWorldRoute = new HelloWorldRoute();
+  const helloWorldRoute: CustomerRoute = new CustomerRoute();
 
     it('It should return Hello World !', async () => {
       const res:String = await helloWorldRoute.getHelloWorld();
