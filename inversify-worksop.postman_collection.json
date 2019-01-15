@@ -1,0 +1,159 @@
+{
+	"info": {
+		"_postman_id": "a6a8d4c5-dcfc-48bb-88e8-e9ec62611701",
+		"name": "inversify-worksop",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create customer",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"Med\",\n    \"lastName\": \"Mouine\",\n    \"email\": \"mohamed.mouine@ingeno.ca\"\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/customer",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"customer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all customers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/customer",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"customer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get customer by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/customer/:customerId",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"customer",
+						":customerId"
+					],
+					"variable": [
+						{
+							"key": "customerId",
+							"value": "9a1f0a33-bc00-42b9-a6d7-c16e69529bae"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add purchase to customer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/customer/:customerId/purchase/:bookId",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"customer",
+						":customerId",
+						"purchase",
+						":bookId"
+					],
+					"variable": [
+						{
+							"key": "customerId",
+							"value": "195062b7-cfdb-43df-8200-3ee822ecf897"
+						},
+						{
+							"key": "bookId",
+							"value": "MyBookId"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add borrow to customer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/customer/:customerId/borrow/:bookId",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"customer",
+						":customerId",
+						"borrow",
+						":bookId"
+					],
+					"variable": [
+						{
+							"key": "customerId",
+							"value": "5e2bd380-1dc9-4334-9814-a9489641cfe7"
+						},
+						{
+							"key": "bookId",
+							"value": "MyBookId"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
