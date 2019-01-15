@@ -15,6 +15,10 @@ import * as path from 'path';
 import { logger } from './logger';
 import { CustomerService } from '@/infrastructure';
 import { TYPES } from '@/constants/types';
+import { CustomerRepository } from '@/domain/customer/CustomerRepository';
+import { InMemoryCustomerRepository } from '@/infrastructure/Repository/customer/InMemoryCustomerRepository';
+import { MockBookRepository } from '@/infrastructure/Repository/book/MockBookRepository';
+import { BookRepository } from '@/domain/book/book/BookRepository';
 
 export class Server {
 
@@ -23,23 +27,20 @@ export class Server {
   }
   public app: express.Application;
 
-  private container: Container;
+  private readonly container: Container;
 
   constructor () {
     this.container = new Container();
     this.init();
     const inversifyApp: InversifyExpressServer = new InversifyExpressServer(this.container);
 
-    // configure application
     inversifyApp.setConfig((app) => {
       return this.config(app);
     });
     this.app = inversifyApp.build();
   }
   public config (app: express.Application): void {
-    // add static paths
     app.use(express.static(path.join(__dirname, 'public')));
-    // mount logger
     app.use(morgan('tiny', {
       stream: {
         write: (message: string) => logger.info(message.trim()),
@@ -68,5 +69,7 @@ export class Server {
 
   private init(): void {
     this.container.bind<CustomerService>(TYPES.CustomerService).to(CustomerService);
+    this.container.bind<CustomerRepository>(TYPES.CustomerRepository).to(InMemoryCustomerRepository);
+    this.container.bind<BookRepository>(TYPES.BookRepository).to(MockBookRepository);
   }
 }

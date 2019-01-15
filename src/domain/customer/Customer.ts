@@ -47,4 +47,12 @@ export class Customer {
   public getBorrows(): Borrow[] {
     return this.borrows;
   }
+
+  public addBookToPurchases(book: Book): void {
+    this.purchases.push(book);
+  }
+
+  public addBorrows(borrow: Borrow): void {
+    this.borrows.push(borrow);
+  }
 }

@@ -1,13 +1,14 @@
 import { Book } from '../book/Book';
 import { AuthorId } from '@/domain/book/author/AuthorId';
+import { BookId } from '@/domain/book/book/BookId';
 
 export class Author {
   private readonly id: AuthorId;
   private readonly firstName: string;
   private readonly lastName: string;
-  private readonly books: Book[];
+  private readonly books: BookId[];
 
-  constructor(id: AuthorId, firstName: string, lastName: string, books: Book[]) {
+  constructor(id: AuthorId, firstName: string, lastName: string, books: BookId[]) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
@@ -26,11 +27,11 @@ export class Author {
     return this.lastName;
   }
 
-  public getBooks(): Book[] {
+  public getBooks(): BookId[] {
     return this.books;
   }
 
-  public addBook(book: Book): void {
-    this.books.push(book);
+  public addBook(bookId: BookId): void {
+    this.books.push(bookId);
   }
 }

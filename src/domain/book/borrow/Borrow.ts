@@ -1,18 +1,18 @@
 import { BorrowId } from '@/domain/book/borrow/BorrowId';
-import { Customer } from '@/domain/customer/Customer';
 import { Book } from '@/domain/book/book/Book';
-import {BorrowInterval} from '@/domain/book/borrow/BorrowInterval';
+import { BorrowInterval } from '@/domain/book/borrow/BorrowInterval';
+import { CustomerId } from '@/domain/customer/CustomerId';
 
 export class Borrow {
   public readonly id: BorrowId;
   public readonly book: Book;
-  public readonly customer: Customer;
-  public readonly borrowInterval: BorrowInterval
+  public readonly customerId: CustomerId;
+  public readonly borrowInterval: BorrowInterval;
 
-  constructor(id: BorrowId, book: Book, customer: Customer, borrowInterval: BorrowInterval) {
+  constructor(id: BorrowId, book: Book, customerId: CustomerId, borrowInterval: BorrowInterval) {
     this.id = id;
     this.book = book;
-    this.customer = customer;
+    this.customerId = customerId;
     this.borrowInterval = borrowInterval;
   }
 
@@ -24,8 +24,8 @@ export class Borrow {
     return this.book;
   }
 
-  public getCustomer(): Customer {
-    return this.customer;
+  public getCustomerId(): CustomerId {
+    return this.customerId;
   }
 
   public getBorrowInterval (): BorrowInterval {
