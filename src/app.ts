@@ -17,6 +17,8 @@ import { CustomerService } from '@/infrastructure';
 import { TYPES } from '@/constants/types';
 import { CustomerRepository } from '@/domain/customer/CustomerRepository';
 import { InMemoryCustomerRepository } from '@/infrastructure/Repository/customer/InMemoryCustomerRepository';
+import { MockBookRepository } from '@/infrastructure/Repository/book/MockBookRepository';
+import { BookRepository } from '@/domain/book/book/BookRepository';
 
 export class Server {
 
@@ -68,5 +70,6 @@ export class Server {
   private init(): void {
     this.container.bind<CustomerService>(TYPES.CustomerService).to(CustomerService);
     this.container.bind<CustomerRepository>(TYPES.CustomerRepository).to(InMemoryCustomerRepository);
+    this.container.bind<BookRepository>(TYPES.BookRepository).to(MockBookRepository);
   }
 }
