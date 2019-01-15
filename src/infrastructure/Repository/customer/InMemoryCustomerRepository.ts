@@ -15,7 +15,7 @@ export class InMemoryCustomerRepository implements CustomerRepository {
   private static readonly customers: Customer[] = [];
 
   public async addBorrowToCustomer(borrow: Borrow): Promise<void> {
-    const customer: Customer = InMemoryCustomerRepository.customers.find(storedCustomer => borrow.getCustomerId() === storedCustomer.getId());
+    const customer: Customer = InMemoryCustomerRepository.customers.find(storedCustomer => borrow.getCustomerId().getStringValue() === storedCustomer.getId().getStringValue());
     if (!customer) {
       throw new CustomerDoesNotExistError(customer.getId());
     }
@@ -24,7 +24,7 @@ export class InMemoryCustomerRepository implements CustomerRepository {
   }
 
   public async addPurchaseToCustomer(book: Book, customerId: CustomerId): Promise<void> {
-    const customer: Customer = InMemoryCustomerRepository.customers.find(storedCustomer => customerId === customer.getId());
+    const customer: Customer = InMemoryCustomerRepository.customers.find(storedCustomer => customerId.getStringValue() === storedCustomer.getId().getStringValue());
     if (!customer) {
       throw new CustomerDoesNotExistError(customerId);
     }
@@ -33,7 +33,7 @@ export class InMemoryCustomerRepository implements CustomerRepository {
   }
 
   public async createCustomer(customerInfo: CustomerCreationRequest): Promise<Customer> {
-    const customer: Customer = new Customer(uuid(),
+    const customer: Customer = new Customer(new CustomerId(uuid()),
                                             customerInfo.firstName,
                                             customerInfo.lastName,
                                             customerInfo.email,
@@ -52,7 +52,7 @@ export class InMemoryCustomerRepository implements CustomerRepository {
   }
 
   public async getCustomer(customerId: CustomerId): Promise<Customer> {
-    return InMemoryCustomerRepository.customers.find(customer => customer.getId() === customerId);
+    return InMemoryCustomerRepository.customers.find(customer => customer.getId().getStringValue() === customerId.getStringValue());
   }
 
   private customerEmailAlreadyInUse(customer: Customer) {

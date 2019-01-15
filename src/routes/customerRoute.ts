@@ -31,7 +31,7 @@ const BASE_ROUTE_URL: string = '/customer';
     public async createCustomer(@requestBody() customerRequest: CustomerCreationRequest, @response() res: express.Response): Promise<void> {
     try {
       const customer: Customer = await this.customerService.createCustomer(customerRequest);
-      res.location(`${BASE_ROUTE_URL}/${customer.getId()}`).sendStatus(HttpStatus.CREATED);
+      res.location(`${BASE_ROUTE_URL}/${customer.getId().getStringValue()}`).sendStatus(HttpStatus.CREATED);
     } catch (err) {
       res.status(HttpStatus.BAD_REQUEST).json({ error: err.message }).send();
     }
@@ -42,19 +42,19 @@ const BASE_ROUTE_URL: string = '/customer';
     return this.customerService.getCustomer(CustomerId.fromString(customerId));
   }
 
-  @httpPost('/customer/:customerId/purchase/:bookId')
-    public async addPurchaseToCustomer(@requestParam('customerId') customerId: string,
-                                       @requestParam('bookId') bookId: string,
-                                       @response() res: express.Response) {
+  @httpPost('/:customerId/purchase/:bookId')
+  public async addPurchaseToCustomer(@requestParam('customerId') customerId: string,
+                                     @requestParam('bookId') bookId: string,
+                                     @response() res: express.Response) {
     try {
-      this.customerService.addPurchaseToCustomer(BookId.fromString(bookId), CustomerId.fromString(customerId));
-      res.sendStatus(HttpStatus.CREATED);
+      await this.customerService.addPurchaseToCustomer(BookId.fromString(bookId), CustomerId.fromString(customerId));
+      res.status(HttpStatus.CREATED).send();
     } catch (err) {
-      res.sendStatus(HttpStatus.BAD_REQUEST).json({ error: err.message });
+      res.status(HttpStatus.BAD_REQUEST).json({ error: err.message }).send();
     }
   }
 
-  @httpPost('/customer/:customerId/borrow/:bookId')
+  @httpPost('/:customerId/borrow/:bookId')
     public async addBorrowToCustomer(@requestParam('customerId') customerId: string,
                                      @requestParam('bookId') bookId: string,
                                      @requestBody() borrowRequest: BorrowInterval,
